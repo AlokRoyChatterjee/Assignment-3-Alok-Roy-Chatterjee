@@ -1,0 +1,7 @@
+{
+  "integration": "coingecko",
+  "airnodeType": "aws", 
+  "network": "rinkeby",
+  "mnemonic": "potato stand pair social abandon window thing hybrid antenna law oil camp",
+  "providerUrl": "https://ropsten.infura.io/v3/7d03145832534835988a34b18b8b97c7"
+}
