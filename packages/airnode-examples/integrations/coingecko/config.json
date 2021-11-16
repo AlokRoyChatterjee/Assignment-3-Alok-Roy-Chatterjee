@@ -1,0 +1,161 @@
+{
+  "chains": [
+    {
+      "authorizers": [],
+      "contracts": {
+        "AirnodeRrp": "${AIRNODE_RRP_ADDRESS}"
+      },
+      "id": "${CHAIN_ID}",
+      "providers": {
+        "exampleProvider": {
+          "url": "${PROVIDER_URL}"
+        }
+      },
+      "type": "evm"
+    }
+  ],
+  "nodeSettings": {
+    "cloudProvider": "${CLOUD_PROVIDER_TYPE}",
+    "airnodeWalletMnemonic": "${AIRNODE_WALLET_MNEMONIC}",
+    "heartbeat": {
+      "enabled": false
+    },
+    "httpGateway": {
+      "enabled": false
+    },
+    "logFormat": "plain",
+    "logLevel": "INFO",
+    "nodeVersion": "0.1.0",
+    "region": "us-east-1",
+    "stage": "dev"
+  },
+  "triggers": {
+    "rrp": [
+      {
+        "endpointId": "0xca41e56a8b265662344c7b7416791703c83fc144ffe19218b1ea57252066b58c",
+        "oisTitle": "messari prices",
+        "endpointName": "coin price"
+      }
+    ]
+  },
+  "ois": [
+    {
+      "oisFormat": "1.0.0",
+      "title": "messari api info",
+      "version": "1.0.0",
+      "apiSpecifications": {
+        "servers": [
+          {
+            "url": "https://data.messari.io/api/v1"
+          }
+        ],
+        "paths": {
+          "/assets/eth/metrics": {
+            "get": {
+              "parameters": [
+                {
+                  "in": "path",
+                  "name": "id"
+                },
+                {
+                  "in": "query",
+                  "name": "market_data"
+                },
+                {
+                  "in": "query",
+                  "name": "marketcap"
+                },
+                {
+                  "in": "query",
+                  "name": "supply"
+                },
+                {
+                  "in": "query",
+                  "name": "mining_stats"
+                },
+                {
+                  "in": "query",
+                  "name": "developer_activity"
+                }
+              ]
+            }
+          }
+        },
+        "components": {
+          "securitySchemes": {}
+        },
+        "security": {}
+      },
+      "endpoints": [
+        {
+          "name": "messari",
+          "operation": {
+            "method": "get",
+            "path": "/assets/eth/metrics"
+          },
+          "fixedOperationParameters": [
+            {
+              "operationParameter": {
+                "in": "query",
+                "name": "market_data"
+              },
+              "value": "true"
+            },
+            {
+              "operationParameter": {
+                "in": "query",
+                "name": "marketcap"
+              },
+              "value": "false"
+            },
+            {
+              "operationParameter": {
+                "in": "query",
+                "name": "supply"
+              },
+              "value": "false"
+            },
+            {
+              "operationParameter": {
+                "in": "query",
+                "name": "mining_stats"
+              },
+              "value": "false"
+            },
+            {
+              "operationParameter": {
+                "in": "query",
+                "name": "developer_activity"
+              },
+              "value": "false"
+            },
+          ],
+          "reservedParameters": [
+            {
+              "name": "_type",
+              "fixed": "int256"
+            },
+            {
+              "name": "_path",
+              "fixed": "data.market_data.price.usd"
+            },
+            {
+              "name": "_times",
+              "fixed": "1000000"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "ethidvalue",
+              "operationParameter": {
+                "in": "path",
+                "name": "id"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "apiCredentials": []
+}
